@@ -18,6 +18,6 @@ public class Person {
 
     private String fullName;
 
-    @OneToMany(mappedBy = "person",cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "person",cascade = CascadeType.ALL)
     private List<Address> addresses ;
 }

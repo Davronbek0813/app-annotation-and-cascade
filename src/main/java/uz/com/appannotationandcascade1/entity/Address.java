@@ -1,9 +1,6 @@
 package uz.com.appannotationandcascade1.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,11 +14,17 @@ public class Address {
     @Id
     @GeneratedValue
     private Integer id;
-
+    @Column(nullable = false)
     private String street;
-
+    @Column(nullable = false)
     private String city;
 
-    @ManyToOne(optional = false)
+    public Address(String street, String city, Person person) {
+        this.street = street;
+        this.city = city;
+        this.person = person;
+    }
+
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Person person;
 }
