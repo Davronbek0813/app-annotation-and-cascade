@@ -13,6 +13,5 @@ public class AddressDto {
     @Size(min = 3,max = 50)
     private String city;
 
-    private Integer personId;
 
 }
