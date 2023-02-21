@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Person {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String fullName;
