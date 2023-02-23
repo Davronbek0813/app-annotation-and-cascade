@@ -3,6 +3,7 @@ package uz.com.appannotationandcascade1.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import uz.com.appannotationandcascade1.entity.Address;
@@ -26,6 +27,8 @@ public class PersonController {
     @Autowired
     AddressRepository addressRepository;
 
+
+    @Transactional(noRollbackFor = NullPointerException.class)
     @PostMapping
     public HttpEntity<?> addPerson(@RequestBody PersonDto personDto) {
 //        Personni saqlaymiz
@@ -43,6 +46,8 @@ public class PersonController {
         }
         person.setAddresses(addressList);
         personRepository.save(person);
+        String var=null;
+        boolean tes=var.equals("test");
         return ResponseEntity.ok("Saqlandi");
     }
 
@@ -69,6 +74,17 @@ public class PersonController {
         }catch (Exception e){
             return ResponseEntity.ok("O'chirilmadi");
         }
+    }
+
+    @DeleteMapping("/forTransactional/{id}")
+    public HttpEntity<?> deleteForTransactional(@PathVariable Integer id){
+             personRepository.deleteById(id);
+             throw new NullPointerException();
+    }
+
+   @GetMapping
+    public HttpEntity<?> getPersons(){
+        return ResponseEntity.ok(personRepository.findAll());
     }
 
 }
