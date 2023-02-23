@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Where;
 
 
 import java.time.LocalDate;
@@ -14,6 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Where(clause ="birth_date is not null")
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
