@@ -21,7 +21,7 @@ public class Person {
 
     private String fullName;
 
-
+    @OrderBy(value = "city asc, street asc ")
     @OneToMany(mappedBy = "person",cascade = CascadeType.ALL)
     private List<Address> addresses ;
 
