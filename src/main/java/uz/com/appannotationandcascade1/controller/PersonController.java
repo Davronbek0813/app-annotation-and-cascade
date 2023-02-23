@@ -27,6 +27,7 @@ public class PersonController {
     @Autowired
     AddressRepository addressRepository;
 
+
     @Transactional(noRollbackFor = NullPointerException.class)
     @PostMapping
     public HttpEntity<?> addPerson(@RequestBody PersonDto personDto) {
@@ -79,6 +80,11 @@ public class PersonController {
     public HttpEntity<?> deleteForTransactional(@PathVariable Integer id){
              personRepository.deleteById(id);
              throw new NullPointerException();
+    }
+
+   @GetMapping
+    public HttpEntity<?> getPersons(){
+        return ResponseEntity.ok(personRepository.findAll());
     }
 
 }
